@@ -1,0 +1,643 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+@import "tailwindcss-safe-area";
+
+@theme {
+  --text-xs: 12px;
+  --text-xs--line-height: 17px;
+  --text-sm: 14px;
+  --text-sm--line-height: 23px;
+  --text-base: 16px;
+  --text-base--line-height: 28px;
+  --text-lg: 18px;
+  --text-lg--line-height: 31px;
+  --text-xl: 20px;
+  --text-xl--line-height: 31px;
+  /* Bengali script (Hind Siliguri) stacks tall vowel signs above and below
+     the headline stroke, so Latin-tight leading clips and crowds it. These
+     looser leading tokens are the readability fix Bangla text gets
+     everywhere on the site. */
+  --leading-snug: 1.5;
+  --leading-normal: 1.7;
+  --leading-relaxed: 1.95;
+  --text-2xl: 24px;
+  --text-2xl--line-height: 32px;
+  --text-3xl: 30px;
+  --text-3xl--line-height: 38px;
+  --text-4xl: 38px;
+  --text-4xl--line-height: 46px;
+  --text-5xl: 52px;
+  --text-5xl--line-height: 60px;
+  --font-sans: "Inter", "Hind Siliguri", "Noto Sans Bengali", system-ui, sans-serif;
+}
+
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                       */
+/* Light: pure white, soft neutral surfaces, one refined teal brand.   */
+/* Dark: deep neutral charcoal, same teal lifted for contrast.         */
+/* ------------------------------------------------------------------ */
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #f3f6f4;
+  --surface-hover: #e9efec;
+  --text: #0d130f;
+  --dim: #5b6a63;
+  --border: #e2e9e5;
+  --border-strong: #cfdbd4;
+  --accent: #0d7a6f;
+  --accent-strong: #08594f;
+  --accent-soft: #e4f3ef;
+  --accent-ink: #ffffff;
+  --accent-grad: linear-gradient(135deg, #12937f 0%, #0a6a5d 100%);
+  --peach: #d97a16;
+  --peach-strong: #b25f0a;
+  --peach-soft: #fdf2e0;
+  --peach-grad: linear-gradient(135deg, #ef9426 0%, #d9730d 100%);
+  --gold: #b3862c;
+  --gold-soft: #faf3dd;
+  --danger: #c4322b;
+  --danger-soft: #fdecea;
+  --success-soft: #e4f3ef;
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --auth-bg: var(--bg);
+  --teal-bright: #2cc9b4;
+  --shadow-card: 0 1px 2px rgba(13, 19, 15, 0.05), 0 10px 30px -14px rgba(13, 19, 15, 0.10);
+  --shadow-lift: 0 2px 6px rgba(13, 19, 15, 0.06), 0 24px 48px -20px rgba(13, 19, 15, 0.22);
+  --shadow-pop: 0 12px 32px -12px rgba(9, 89, 79, 0.35);
+  --radius: 20px;
+  --space-surface: var(--surface);
+  --space-surface-alt: var(--surface-alt);
+  --space-muted: var(--dim);
+  --space-border: var(--border);
+  --space-accent: var(--accent);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0a0c0b;
+  --surface: #131615;
+  --surface-alt: #1b201d;
+  --surface-hover: #242a26;
+  --text: #f2f5f3;
+  --dim: #9aa8a1;
+  --border: #242b27;
+  --border-strong: #333d37;
+  --accent: #2cc9b4;
+  --accent-strong: #63decb;
+  --accent-soft: #123129;
+  --accent-ink: #05231d;
+  --accent-grad: linear-gradient(135deg, #3ad6c1 0%, #1db49e 100%);
+  --peach: #f0a04b;
+  --peach-strong: #f7bc77;
+  --peach-soft: #33240f;
+  --peach-grad: linear-gradient(135deg, #f5ab4e 0%, #e8890c 100%);
+  --gold: #d9b45c;
+  --gold-soft: #2e2712;
+  --danger: #f08a84;
+  --danger-soft: #3a1d1b;
+  --success-soft: #123129;
+  --nav-bg: rgba(10, 12, 11, 0.85);
+  --auth-bg: var(--bg);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.45), 0 10px 30px -14px rgba(0, 0, 0, 0.55);
+  --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.5), 0 24px 48px -20px rgba(0, 0, 0, 0.65);
+  --shadow-pop: 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    color-scheme: dark;
+    --bg: #0a0c0b;
+    --surface: #131615;
+    --surface-alt: #1b201d;
+    --surface-hover: #242a26;
+    --text: #f2f5f3;
+    --dim: #9aa8a1;
+    --border: #242b27;
+    --border-strong: #333d37;
+    --accent: #2cc9b4;
+    --accent-strong: #63decb;
+    --accent-soft: #123129;
+    --accent-ink: #05231d;
+    --accent-grad: linear-gradient(135deg, #3ad6c1 0%, #1db49e 100%);
+    --peach: #f0a04b;
+    --peach-strong: #f7bc77;
+    --peach-soft: #33240f;
+    --peach-grad: linear-gradient(135deg, #f5ab4e 0%, #e8890c 100%);
+    --gold: #d9b45c;
+    --gold-soft: #2e2712;
+    --danger: #f08a84;
+    --danger-soft: #3a1d1b;
+    --success-soft: #123129;
+    --nav-bg: rgba(10, 12, 11, 0.85);
+    --auth-bg: var(--bg);
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.45), 0 10px 30px -14px rgba(0, 0, 0, 0.55);
+    --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.5), 0 24px 48px -20px rgba(0, 0, 0, 0.65);
+    --shadow-pop: 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Reserve the scrollbar's space even on pages too short to scroll, so
+     centered content (the auth forms) never shifts sideways when a
+     scrollbar appears or disappears between pages or when an error box
+     makes a short page scrollable. */
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Form fields draw their OWN focus ring (border + soft shadow on .input /
+   .field-shell). The global outline on top of it painted a second, offset
+   teal box inside the field — the "wrong color" frame students saw on the
+   password box — so inputs never get the generic outline. */
+.input:focus-visible,
+.field-shell input:focus-visible {
+  outline: none;
+  outline-offset: 0;
+}
+
+/* Browser autofill otherwise paints fields with its own blue/yellow tint;
+   keep the site's surface + text colors instead. */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 80px var(--surface) inset;
+  -webkit-text-fill-color: var(--text);
+  caret-color: var(--text);
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Protected learning content (word cards, lesson bodies): text cannot be
+   selected or long-pressed, and images cannot be dragged out. Casual
+   copy attempts are blocked by the listeners in App.tsx as well. */
+[data-protect] {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+[data-protect] img {
+  -webkit-user-drag: none;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ---------- Shared premium controls ---------- */
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    background: var(--accent-grad);
+    color: var(--accent-ink);
+    padding: 0.72rem 1.6rem;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.25;
+    box-shadow: var(--shadow-pop), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    transition: filter 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary:hover { filter: brightness(1.07); transform: translateY(-1px); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled { opacity: 0.55; box-shadow: none; transform: none; }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.72rem 1.6rem;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.25;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+  }
+  .btn-outline:hover { border-color: var(--accent); background: var(--surface-alt); transform: translateY(-1px); }
+  .btn-outline:active { transform: scale(0.98); }
+  .btn-outline:disabled { opacity: 0.45; transform: none; }
+
+  .btn-soft {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    background: var(--surface-alt);
+    color: var(--text);
+    padding: 0.6rem 1.15rem;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.25;
+    transition: background 0.15s ease, transform 0.12s ease;
+  }
+  .btn-soft:hover { background: var(--surface-hover); }
+  .btn-soft:active { transform: scale(0.98); }
+  .btn-soft:disabled { opacity: 0.45; }
+
+  .btn-warm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    background: var(--peach-grad);
+    color: #ffffff;
+    padding: 0.72rem 1.6rem;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.25;
+    box-shadow: 0 12px 26px -12px var(--peach), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    transition: filter 0.15s ease, transform 0.12s ease;
+  }
+  .btn-warm:hover { filter: brightness(1.06); transform: translateY(-1px); }
+  .btn-warm:active { transform: scale(0.98); }
+
+  .input {
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.72rem 1rem;
+    /* 16px minimum: below that, mobile browsers auto-ZOOM the page when a
+       field is focused, which made the login/signup page visibly jump
+       every time a field was tapped. */
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .input::placeholder { color: var(--dim); }
+  .input:hover { border-color: var(--border-strong); }
+  .input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+
+  .card {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-hover {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--border-strong);
+  }
+
+  .icon-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 14%, transparent);
+  }
+
+  /* Segmented control (21st.dev-style): modes, tabs, filters. */
+  .seg {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface-alt);
+  }
+  .seg-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border-radius: 999px;
+    padding: 0.5rem 1.05rem;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--dim);
+    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .seg-btn:hover { color: var(--text); }
+  .seg-btn[aria-selected="true"], .seg-btn[aria-pressed="true"], .seg-btn.is-active {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 0 1px 3px rgba(13, 19, 15, 0.10), 0 4px 12px -6px rgba(13, 19, 15, 0.18);
+  }
+
+  /* Small label pill used above section titles. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0.4rem 0.9rem;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dim);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Premium search pill (hero + vocab page). */
+  .search-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0.4rem;
+    box-shadow: var(--shadow-lift);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .search-pill:focus-within {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-lift), 0 0 0 4px var(--accent-soft);
+  }
+
+  /* ---- Auth (login / signup / admin) split-screen ---- */
+  /* Form side: the site's own background — white in light mode, charcoal
+     in dark mode — same palette as the rest of VocabMaster. */
+  .auth-side {
+    background: var(--auth-bg);
+  }
+  /* Brand side: fixed deep-teal panel with a soft teal glow — same in
+     both themes, like a printed book cover in the site's brand color. */
+  .auth-panel {
+    background:
+      radial-gradient(620px 320px at 88% -6%, rgba(44, 201, 180, 0.30), transparent 62%),
+      radial-gradient(760px 520px at -12% 112%, rgba(18, 147, 127, 0.42), transparent 58%),
+      linear-gradient(158deg, #04241f 0%, #063830 54%, #0a5a4c 125%);
+  }
+  .auth-dots {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.13) 1.1px, transparent 1.1px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse 80% 60% at 70% 20%, black 25%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 70% 20%, black 25%, transparent 78%);
+  }
+  /* Input with a leading icon / prefix segment (auth forms). */
+  .field-shell {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0 0.9rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field-shell:hover { border-color: var(--border-strong); }
+  .field-shell:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .field-shell input {
+    width: 100%;
+    min-width: 0;
+    background: transparent;
+    padding: 0.78rem 0;
+    /* 16px minimum — see .input: stops the mobile focus auto-zoom jump. */
+    font-size: 16px;
+    color: var(--text);
+    outline: none;
+  }
+  .field-shell input::placeholder { color: var(--dim); }
+
+  /* Glass panel floating over imagery. */
+  .glass-chip {
+    border-radius: 18px;
+    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* Long-form Bangla reading (lesson bodies, explanations): a touch larger
+     with very open leading so conjuncts and vowel signs never crowd. */
+  .bn-read {
+    font-size: 16.5px;
+    line-height: 1.95;
+    letter-spacing: 0.004em;
+  }
+  .bn-read-sm {
+    font-size: 15.5px;
+    line-height: 1.9;
+  }
+
+  /* Progress track + fill. */
+  .progress-track {
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--surface-alt);
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--accent-grad);
+    transition: width 0.4s ease;
+  }
+}
+
+/* Subtle dot texture for the hero backdrop (theme-aware, very faint). */
+.hero-dots {
+  background-image: radial-gradient(color-mix(in srgb, var(--text) 9%, transparent) 1.1px, transparent 1.1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 75%);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Phone tap targets: at least 36px tall for interactive controls. */
+@layer base {
+  button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) {
+    min-height: 2.25rem;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Full-site responsive hardening: nothing on any page may push the    */
+/* page itself sideways. Media never exceeds its box, long words wrap, */
+/* and wide tables scroll INSIDE their card (never the whole page).    */
+/* ------------------------------------------------------------------ */
+html, body {
+  overflow-x: clip;
+}
+img, video, canvas, svg {
+  max-width: 100%;
+}
+canvas {
+  height: auto;
+}
+pre, code {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.break-anywhere {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* ------------------------------------------------------------------ */
+/* Book reader: the PDF page always scales to its frame, so the FULL   */
+/* page is visible in every view mode. Fit-page narrows the frame      */
+/* until the whole sheet fits the screen height; fit-width and the     */
+/* zoom steps widen it (the stage then scrolls, never the page).       */
+/* ------------------------------------------------------------------ */
+.reader-stage {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.reader-stage::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.reader-stage::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+}
+.reader-page canvas {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+/* The viewer's own nav row sits under the page; in the premium reader
+   it is redundant (the reader has its own bars) but harmless — keep it
+   compact and on-theme. */
+.reader-page nav {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+}
+/* Reading themes for the stage behind the white page sheet. */
+.reader-theme-dark {
+  background:
+    radial-gradient(900px 480px at 85% -10%, rgba(44, 201, 180, 0.16), transparent 60%),
+    radial-gradient(700px 500px at -10% 110%, rgba(18, 147, 127, 0.20), transparent 55%),
+    linear-gradient(160deg, #07120f 0%, #0a1a16 55%, #06110d 100%);
+}
+.reader-theme-light {
+  background:
+    radial-gradient(900px 480px at 85% -10%, rgba(18, 147, 127, 0.14), transparent 60%),
+    linear-gradient(160deg, #eef4f1 0%, #e2ece7 55%, #d8e4dd 100%);
+}
+.reader-theme-sepia {
+  background:
+    radial-gradient(900px 480px at 85% -10%, rgba(217, 164, 65, 0.16), transparent 60%),
+    linear-gradient(160deg, #f3ead8 0%, #eadfc6 55%, #e0d2b2 100%);
+}
+/* Page scrubber in the reader's bottom bar. */
+.reader-scrub {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  outline: none;
+  min-height: 0;
+}
+.reader-scrub::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #2cc9b4;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+.reader-scrub::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #2cc9b4;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+.reader-theme-light .reader-scrub,
+.reader-theme-sepia .reader-scrub {
+  background: rgba(10, 40, 32, 0.18);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    animation: fadeIn 0.4s cubic-bezier(0.22, 0.8, 0.32, 1) both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+  /* Slow light sweep across the flashcard's front face. */
+  .flash-sheen {
+    animation: flashSheen 5.5s ease-in-out infinite;
+  }
+  @keyframes flashSheen {
+    0%, 55%, 100% { transform: translateX(0) rotate(12deg); opacity: 0; }
+    70% { opacity: 1; }
+    85% { transform: translateX(560px) rotate(12deg); opacity: 0; }
+  }
+  .float-slow {
+    animation: floatY 5s ease-in-out infinite;
+  }
+  .float-slower {
+    animation: floatY 6.5s ease-in-out infinite reverse;
+  }
+  @keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+  }
+}

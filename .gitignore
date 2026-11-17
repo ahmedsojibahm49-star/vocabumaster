@@ -1,0 +1,19 @@
+# Dependencies + build output
+node_modules/
+backend/dist/
+frontend/dist/
+
+# Secrets + local data (never commit)
+backend/.env
+frontend/.env
+backend/local.db
+local.db
+
+# Uploaded files (course videos, cover images, book PDF) — live on the
+# server's disk, never in git or in the code zip.
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Editor / OS
+.DS_Store
+*.local
